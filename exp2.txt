@@ -1,0 +1,67 @@
+EXPERIMENT 2 — Breadth First Search and Depth First Search
+Aim
+To implement Breadth First Search (BFS) and Depth First Search (DFS) techniques for graph traversal.
+Algorithm — 7 Steps
+1. Represent the graph using an adjacency list.
+2. Select the starting vertex.
+3. For BFS, initialize a queue and visited set.
+4. Visit the starting vertex and add its neighbors to the queue.
+5. For DFS, recursively visit each unvisited adjacent vertex.
+6. Continue until all reachable vertices are visited.
+7. Display the BFS and DFS traversal orders.
+Python Program
+from collections import deque
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    result = []
+
+    while queue:
+        node = queue.popleft()
+
+        if node not in visited:
+            visited.add(node)
+            result.append(node)
+
+            for neighbour in graph[node]:
+                if neighbour not in visited:
+                    queue.append(neighbour)
+
+    return result
+
+
+def dfs(graph, node, visited=None):
+    if visited is None:
+        visited = set()
+
+    visited.add(node)
+    result = [node]
+
+    for neighbour in graph[node]:
+        if neighbour not in visited:
+            result.extend(dfs(graph, neighbour, visited))
+
+    return result
+
+
+print("BFS Traversal:", bfs(graph, 'A'))
+print("DFS Traversal:", dfs(graph, 'A'))
+
+
+Sample Output
+BFS Traversal: ['A', 'B', 'C', 'D', 'E', 'F']
+
+DFS Traversal: ['A', 'B', 'D', 'E', 'F', 'C']
+
+Result
+Thus, the BFS and DFS graph traversal techniques were successfully implemented.

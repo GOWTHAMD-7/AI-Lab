@@ -1,0 +1,9 @@
+Student_ID,Study_Hours,Attendance_Pct,Department,Internal_Score,Result,Dept_Code,Result_Code,Study_Hours_Scaled,Attendance_Pct_Scaled,Internal_Score_Scaled,Performance_Annotation
+101,12.0,85.0,CSE,74.0,Pass,0,1,0.2121,0.6667,0.5417,First_Class
+102,18.5,92.0,ECE,88.0,Pass,1,1,0.6061,0.9,0.8333,Distinction
+103,16.83,78.0,CSE,62.0,Pass,0,1,0.5048,0.4333,0.2917,First_Class
+104,22.0,83.83,IT,91.0,Pass,2,1,0.8182,0.6277,0.8958,Distinction
+105,8.5,65.0,ECE,48.0,Fail,1,0,0.0,0.0,0.0,Needs_Improvement
+106,16.83,88.0,CSE,79.0,Pass,0,1,0.5048,0.7667,0.6458,First_Class
+107,25.0,95.0,IT,96.0,Pass,2,1,1.0,1.0,1.0,Distinction
+108,15.0,83.83,ECE,70.0,Pass,1,1,0.3939,0.6277,0.4583,First_Class

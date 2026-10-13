@@ -1,0 +1,99 @@
+EXPERIMENT 3 — Hill Climbing and A* Algorithm
+Aim
+To implement Hill Climbing and A* search algorithms for solving a path-finding problem.
+Algorithm — 7 Steps
+1. Define the graph with nodes, edges, and heuristic values.
+2. Select the initial node and goal node.
+3. In Hill Climbing, evaluate neighboring nodes using their heuristic values.
+4. Move to the best neighboring node.
+5. Repeat until the goal is reached or no better node exists.
+6. In A*, calculate f(n) = g(n) + h(n) for each candidate node.
+7. Select the node with minimum cost and continue until the goal is reached.
+Python Program
+import heapq
+
+graph = {
+    'A': [('B', 1), ('C', 3)],
+    'B': [('D', 2), ('E', 5)],
+    'C': [('E', 2)],
+    'D': [('G', 4)],
+    'E': [('G', 1)],
+    'G': []
+}
+
+heuristic = {
+    'A': 6,
+    'B': 4,
+    'C': 3,
+    'D': 4,
+    'E': 1,
+    'G': 0
+}
+
+
+def hill_climbing(start, goal):
+    current = start
+    path = [current]
+
+    while current != goal:
+        neighbours = graph[current]
+
+        if not neighbours:
+            break
+
+        next_node = min(
+            neighbours,
+            key=lambda x: heuristic[x[0]]
+        )[0]
+
+        if heuristic[next_node] >= heuristic[current]:
+            break
+
+        current = next_node
+        path.append(current)
+
+    return path
+
+
+def a_star(start, goal):
+    priority_queue = [(heuristic[start], 0, start, [start])]
+    visited = set()
+
+    while priority_queue:
+        f, cost, node, path = heapq.heappop(priority_queue)
+
+        if node == goal:
+            return path, cost
+
+        if node in visited:
+            continue
+
+        visited.add(node)
+
+        for neighbour, edge_cost in graph[node]:
+            new_cost = cost + edge_cost
+            new_f = new_cost + heuristic[neighbour]
+
+            heapq.heappush(
+                priority_queue,
+                (new_f, new_cost, neighbour, path + [neighbour])
+            )
+
+    return None, float("inf")
+
+
+print("Hill Climbing Path:", hill_climbing('A', 'G'))
+
+path, cost = a_star('A', 'G')
+print("A* Path:", path)
+print("A* Cost:", cost)
+
+
+Sample Output
+Hill Climbing Path: ['A', 'C', 'E', 'G']
+
+A* Path: ['A', 'C', 'E', 'G']
+A* Cost: 6
+
+Result
+Thus, the Hill Climbing and A* search algorithms were successfully implemented for path finding.

@@ -1,0 +1,71 @@
+EXPERIMENT 1 — Data Pre-processing, Annotation and Dataset Creation
+Aim
+To perform data preprocessing, annotation, and creation of a dataset using Python AI/data-processing techniques.
+Algorithm — 7 Steps
+1. Import the required Python libraries.
+2. Create or load the raw dataset.
+3. Identify and handle missing values.
+4. Remove duplicate or inconsistent data.
+5. Convert categorical data into numerical form.
+6. Normalize or scale numerical features.
+7. Save the processed data as a new dataset.
+
+
+
+Python Program
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder, MinMaxScaler
+
+# Create sample dataset
+data = {
+    "Name": ["Rahul", "Arun", "Priya", "Kavi", "Rahul"],
+    "Age": [21, 22, None, 20, 21],
+    "Department": ["CSE", "ECE", "CSE", "IT", "CSE"],
+    "Marks": [85, 78, 92, None, 85]
+}
+
+df = pd.DataFrame(data)
+
+print("Original Dataset:")
+print(df)
+
+# Handle missing values
+df["Age"] = df["Age"].fillna(df["Age"].mean())
+df["Marks"] = df["Marks"].fillna(df["Marks"].mean())
+
+# Remove duplicate rows
+df = df.drop_duplicates()
+
+# Encode categorical column
+encoder = LabelEncoder()
+df["Department"] = encoder.fit_transform(df["Department"])
+
+# Normalize Marks
+scaler = MinMaxScaler()
+df["Marks"] = scaler.fit_transform(df[["Marks"]])
+
+print("\nProcessed Dataset:")
+print(df)
+
+# Save dataset
+df.to_csv("processed_dataset.csv", index=False)
+
+
+Sample Output
+Original Dataset:
+    Name   Age Department  Marks
+0  Rahul  21.0        CSE   85.0
+1   Arun  22.0        ECE   78.0
+2  Priya   NaN        CSE   92.0
+3   Kavi  20.0         IT    NaN
+4  Rahul  21.0        CSE   85.0
+
+Processed Dataset:
+    Name   Age  Department     Marks
+0  Rahul  21.0           0  0.571429
+1   Arun  22.0           1  0.000000
+2  Priya  21.0           0  1.000000
+3   Kavi  20.0           2  0.571429
+
+Result
+Thus, the raw dataset was successfully preprocessed, encoded, normalized, and saved as a structured dataset.

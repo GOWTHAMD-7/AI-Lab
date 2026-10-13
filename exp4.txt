@@ -1,0 +1,86 @@
+EXPERIMENT 4 — Designing a Chatbot Application
+Aim
+To design and implement a simple rule-based chatbot application using Python.
+Algorithm — 7 Steps
+1. Start the chatbot application.
+2. Define a set of user inputs and corresponding responses.
+3. Accept input from the user.
+4. Convert the input into lowercase for comparison.
+5. Match the input with predefined patterns.
+6. Generate the appropriate response.
+7. Continue the conversation until the user enters bye.
+Python Program
+import random
+
+responses = {
+    "hello": [
+        "Hello! How can I help you?",
+        "Hi! Nice to meet you."
+    ],
+    "how are you": [
+        "I am doing great!",
+        "I am fine. Thank you!"
+    ],
+    "name": [
+        "I am AI Assistant.",
+        "You can call me ChatBot."
+    ],
+    "college": [
+        "I can help you with college-related queries."
+    ]
+}
+
+
+def chatbot(user_input):
+    text = user_input.lower()
+
+    if "hello" in text or "hi" in text:
+        return random.choice(responses["hello"])
+
+    elif "how are you" in text:
+        return random.choice(responses["how are you"])
+
+    elif "your name" in text:
+        return random.choice(responses["name"])
+
+    elif "college" in text:
+        return responses["college"][0]
+
+    elif "bye" in text:
+        return "Goodbye! Have a nice day."
+
+    else:
+        return "Sorry, I don't understand that."
+
+
+print("AI Chatbot Started")
+print("Type 'bye' to exit.")
+
+while True:
+    user = input("You: ")
+
+    reply = chatbot(user)
+    print("Bot:", reply)
+
+    if "bye" in user.lower():
+        break
+
+
+Sample Output
+AI Chatbot Started
+Type 'bye' to exit.
+
+You: Hello
+Bot: Hi! Nice to meet you.
+
+You: What is your name?
+Bot: I am AI Assistant.
+
+You: How are you?
+Bot: I am doing great!
+
+You: Bye
+Bot: Goodbye! Have a nice day.
+
+Result
+Thus, a simple rule-based chatbot application was successfully designed and implemented using Python.

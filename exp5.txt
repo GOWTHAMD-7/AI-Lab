@@ -1,0 +1,64 @@
+EXPERIMENT 5 — Inference System
+Aim
+To implement a simple rule-based inference system using facts and rules.
+Algorithm — 7 Steps
+1. Define the initial facts available in the knowledge base.
+2. Define rules containing conditions and conclusions.
+3. Check each rule against the available facts.
+4. Identify rules whose conditions are satisfied.
+5. Add the resulting conclusions to the knowledge base.
+6. Repeat the process until no new facts can be derived.
+7. Display the final inferred facts.
+Python Program
+facts = {
+    "has_fever",
+    "has_cough"
+}
+
+rules = [
+    ({"has_fever", "has_cough"}, "may_have_flu"),
+    ({"may_have_flu"}, "should_consult_doctor"),
+    ({"has_fever"}, "needs_rest"),
+    ({"has_cough"}, "needs_warm_water")
+]
+
+
+def inference_engine(facts, rules):
+    facts = set(facts)
+    changed = True
+
+    while changed:
+        changed = False
+
+        for conditions, conclusion in rules:
+            if conditions.issubset(facts) and conclusion not in facts:
+                facts.add(conclusion)
+                changed = True
+
+    return facts
+
+
+final_facts = inference_engine(facts, rules)
+
+print("Initial Facts:")
+print(facts)
+
+print("\nInferred Facts:")
+for fact in sorted(final_facts):
+    print("-", fact)
+
+
+Sample Output
+Initial Facts:
+{'has_fever', 'has_cough'}
+
+Inferred Facts:
+- has_cough
+- has_fever
+- may_have_flu
+- needs_rest
+- needs_warm_water
+- should_consult_doctor
+
+Result
+Thus, the rule-based inference system was successfully implemented using facts and logical rules.
